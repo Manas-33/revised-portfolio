@@ -1,0 +1,42 @@
+---
+title: Premier League Prediction
+tagline: End-to-end MLOps platform forecasting match outcomes with multi-source data fusion and explainable AI.
+category: ML · MLOps
+stat: zero-leakage feature store
+year: "2025"
+order: 6
+featured: true
+repo: https://github.com/manas-33
+demo:
+stack: [Prefect, PostgreSQL, XGBoost, MLflow, SHAP, FastAPI, Streamlit, GCP]
+metrics:
+  - { value: "Zero-leakage", label: "time-indexed feature store" }
+  - { value: "RPS + SHAP", label: "eval + per-prediction explainability" }
+  - { value: "3 sources", label: "FPL, Understat, football-data" }
+overview: >-
+  An end-to-end MLOps platform that ingests football data from multiple sources,
+  engineers predictive features, and serves explainable match-outcome forecasts on
+  automated weekly pipelines with full experiment tracking.
+highlights:
+  - Automated Prefect pipeline ingests weekly data from the FPL API, Understat, and football-data.org into a time-indexed PostgreSQL feature store with zero data leakage.
+  - Engineered features include ICT-weighted squad-depletion scores, rolling xG/xGA averages, and xG-overperformance regression signals.
+  - Fine-tuned twitter-roberta-base-sentiment for pre-match NLP sentiment on manager press conferences.
+  - XGBoost models tracked with MLflow, evaluated with Ranked Probability Score and full SHAP-based per-prediction explainability.
+  - FastAPI inference API on Google Cloud Run with a Streamlit frontend for what-if injury simulation and Kelly Criterion backtesting.
+---
+
+```mermaid
+flowchart LR
+  subgraph sources [Data sources]
+    FPL["FPL API"]
+    US["Understat"]
+    FD["football-data.org"]
+  end
+  sources --> Prefect["Prefect pipeline"]
+  Prefect --> FS[("Time-indexed feature store")]
+  FS --> Feat["Feature engineering (xG, ICT, sentiment)"]
+  Feat --> Model["XGBoost + MLflow"]
+  Model --> SHAP["SHAP explainability"]
+  Model --> API["FastAPI on Cloud Run"]
+  API --> UI["Streamlit: what-if + backtest"]
+```

@@ -1,0 +1,42 @@
+---
+title: PRism
+tagline: Dependency-aware AI code review that posts context-rich feedback directly on GitHub pull requests.
+category: AI · Infra
+stat: AST-scoped PR review
+year: "2025"
+order: 1
+featured: true
+repo: https://github.com/manas-33
+demo:
+stack: [Tree-sitter, Gemini, Qdrant, Redis, Celery, AWS ECS, Docker]
+metrics:
+  - { value: "Repo-wide", label: "AST dependency graph" }
+  - { value: "Per-SHA", label: "cached ASTs + symbol maps" }
+  - { value: "Scoped RAG", label: "style-guide enforcement" }
+overview: >-
+  PRism is an event-driven developer tool that reviews GitHub pull requests with real
+  codebase context instead of just the raw diff. When a PR event fires, it walks the
+  repo's dependency graph to find every file and symbol impacted by the change, then
+  assembles a tightly scoped prompt so the model reviews the change the way a senior
+  engineer familiar with the codebase would.
+highlights:
+  - AST parsing with Tree-sitter builds repo-wide dependency graphs, identifying impacted files and call sites per PR change.
+  - Context-scoped prompting assembles diffs, impacted call sites, and internal engineering rules into tightly scoped Gemini prompts.
+  - Scoped RAG via Qdrant enforces internal style guides, with per-commit-SHA caching of ASTs and symbol maps in Redis.
+  - Deployed on AWS ECS with Celery and isolated Docker workers, webhook signature verification, and short-lived GitHub App tokens.
+  - Precision/recall evaluation pipeline runs against known-bad PR test sets for continuous quality measurement.
+---
+
+```mermaid
+flowchart LR
+  GH["GitHub PR webhook"] --> API["FastAPI ingest"]
+  API --> Q["Celery queue"]
+  Q --> W["Isolated worker"]
+  W --> AST["Tree-sitter dep graph"]
+  AST --> Cache["Redis per-SHA cache"]
+  W --> RAG["Qdrant style-guide RAG"]
+  AST --> Prompt["Scoped prompt builder"]
+  RAG --> Prompt
+  Prompt --> LLM["Gemini API"]
+  LLM --> Review["PR review comments"]
+```

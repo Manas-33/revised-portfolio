@@ -1,0 +1,39 @@
+---
+title: OttoNote
+tagline: Cross-platform AI meeting assistant with real-time transcription, speaker diarization, and summarization.
+category: AI · Product
+stat: 95% ASR accuracy
+year: "2025"
+order: 4
+featured: true
+repo: https://github.com/manas-33
+demo:
+stack: [Whisper, pyannote.audio, SummLlama3.1, FastAPI, Flutter, Chrome Extension]
+metrics:
+  - { value: "95%", label: "transcription accuracy" }
+  - { value: "-60%", label: "post-meeting follow-up overhead" }
+  - { value: "3 platforms", label: "Zoom, Meet, Teams" }
+overview: >-
+  OttoNote automates meeting documentation end to end — capturing audio, transcribing
+  and attributing it to speakers, then summarizing and extracting action items. It works
+  in person via a Flutter app and in virtual meetings via a Chrome extension.
+highlights:
+  - Real-time transcription pipeline with OpenAI Whisper at 95% accuracy, integrated with pyannote.audio for speaker diarization.
+  - Fine-tuned SummLlama3.1 for multi-speaker summarization, plus Transformers pipelines for action-item extraction and topic clustering.
+  - FastAPI ML inference backend, a Flutter mobile app, and a Chrome extension supporting Zoom, Meet, and Teams.
+  - Audio-chunking optimizations and Google Calendar integration cut post-meeting follow-up overhead by 60%.
+---
+
+```mermaid
+flowchart LR
+  subgraph clients [Clients]
+    Mobile["Flutter app"]
+    Ext["Chrome extension"]
+  end
+  clients --> API["FastAPI inference backend"]
+  API --> ASR["Whisper transcription"]
+  ASR --> Diar["pyannote diarization"]
+  Diar --> Sum["SummLlama3.1 summarizer"]
+  Sum --> Items["Action-item + topic extraction"]
+  Items --> Cal["Google Calendar sync"]
+```

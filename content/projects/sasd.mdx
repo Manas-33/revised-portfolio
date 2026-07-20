@@ -1,0 +1,38 @@
+---
+title: SASD
+tagline: Syntax-aware speculative decoding that speeds up LLM code generation while enforcing syntactic correctness.
+category: ML · Systems
+stat: 25.03 tps, +4.7pp acceptance
+year: "2025"
+order: 2
+featured: true
+repo: https://github.com/manas-33
+demo:
+stack: [PyTorch, DeepSeek-Coder, Tree-sitter, CUDA, scikit-learn]
+metrics:
+  - { value: "25.03 tps", label: "throughput (+2.6%)" }
+  - { value: "89.7%", label: "token acceptance (+4.7pp)" }
+  - { value: "-79%", label: "unprofitable halt rate" }
+overview: >-
+  SASD is a GPU-accelerated inference framework that accelerates code generation with
+  speculative decoding while using a syntax signal to keep output syntactically valid.
+  A small draft model proposes tokens that a large target model verifies, and a learned
+  halt policy decides when stopping speculation actually pays off.
+highlights:
+  - Speculative decoding pairs DeepSeek-Coder-1.3B (draft) with DeepSeek-Coder-33B (target), using manual model.forward() calls for fine-grained KV-cache control.
+  - A Tree-sitter parser detects invalid draft tokens mid-generation; a bracket pre-filter and incremental edits avoid full reparses on most steps.
+  - Diagnosed over-halting as the throughput regression's root cause, then trained a logistic-regression classifier (78.5% accuracy) to suppress unprofitable halts.
+  - Refactored the parser from a halt trigger into an on-demand feature provider, eliminating runtime parsing overhead while preserving the syntactic signal.
+  - Best measured throughput of 25.03 tps (+2.6%) with a +4.7pp acceptance rate and no additional training.
+---
+
+```mermaid
+flowchart LR
+  Draft["Draft model 1.3B"] --> Tokens["Speculative tokens"]
+  Tokens --> Parser["Tree-sitter feature provider"]
+  Parser --> Clf["Halt classifier (logreg)"]
+  Clf -->|"keep"| Verify["Target model 33B verify"]
+  Clf -->|"suppress halt"| Verify
+  Verify --> Accept["Accepted tokens"]
+  Accept --> Draft
+```

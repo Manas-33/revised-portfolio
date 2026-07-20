@@ -1,0 +1,52 @@
+---
+title: Race-free job dispatch with Postgres row-level locking
+date: "2026-05-02"
+type: decision
+project: orbit
+tags: [distributed-systems, postgres, concurrency, go]
+summary: Two workers claiming the same job is the classic orchestration bug. Here is why I reached for Postgres row-level locks instead of a dedicated queue, and the exact query that makes dispatch race-free.
+---
+
+## Context
+
+Orbit dispatches jobs to many concurrent workers. The core hazard is a race: two
+workers read the same "pending" job and both start running it, violating at-least-once
+semantics by turning it into "at-least-twice."
+
+## Decision and tradeoffs
+
+I already had PostgreSQL as the source of truth for job state. I could have added a
+dedicated broker (RabbitMQ, Redis streams), but that introduces a second system to keep
+consistent with the database. Instead I made the claim itself atomic in Postgres using
+`SELECT ... FOR UPDATE SKIP LOCKED`.
+
+Tradeoff: this couples dispatch to the database's throughput, but for long-running jobs
+(seconds to minutes) the claim rate is low and the simplicity of a single source of
+truth wins.
+
+## How it works
+
+`SKIP LOCKED` lets each worker grab a different unlocked row without blocking on rows
+another worker already holds:
+
+```sql
+UPDATE jobs
+SET status = 'running', worker_id = $1, leased_until = now() + interval '30s'
+WHERE id = (
+  SELECT id FROM jobs
+  WHERE status = 'pending'
+  ORDER BY priority DESC, created_at
+  FOR UPDATE SKIP LOCKED
+  LIMIT 1
+)
+RETURNING id;
+```
+
+The whole claim is one transaction, so a job moves to `running` exactly once. A separate
+reaper expires `leased_until` to recover jobs from crashed workers.
+
+## Outcome
+
+No duplicate claims under concurrency, at-least-once delivery, and no extra
+infrastructure — plus a `job_attempts` table that records every lease, exit code, and
+log reference for full auditability.

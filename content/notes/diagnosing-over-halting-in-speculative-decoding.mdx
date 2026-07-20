@@ -1,0 +1,53 @@
+---
+title: Diagnosing over-halting in speculative decoding
+date: "2026-06-14"
+type: decision
+project: sasd
+tags: [inference, speculative-decoding, profiling, ml-systems]
+summary: A syntax parser that halted on every invalid draft token seemed obviously correct — and it was quietly destroying throughput. Here is how I found it and what I did instead.
+---
+
+## Context
+
+In SASD, a small draft model proposes tokens that a large target model verifies. I
+added a Tree-sitter parser to catch syntactically-invalid draft tokens and halt
+speculation early, on the assumption that continuing past a broken token wastes target
+compute. Intuitive — but throughput actually regressed against plain speculative
+decoding.
+
+## Decision and tradeoffs
+
+Rather than tune the parser heuristics, I profiled per-event outcomes: for every halt,
+was speculation actually going to be rejected anyway? The data showed most halts were
+**unprofitable** — the target would have accepted the sequence. The parser was correct
+about syntax but wrong about economics.
+
+The options I weighed:
+
+- Loosen the halt heuristic manually — brittle, and still guessing.
+- Drop the parser entirely — loses a real signal.
+- **Learn when halting pays off** — keep the signal, remove the bad decisions.
+
+I chose the last.
+
+## How it works
+
+I trained a logistic-regression classifier on profiled features to predict whether a
+halt would be profitable, and refactored the parser from a *halt trigger* into an
+*on-demand feature provider*.
+
+```python
+# parser stops deciding; it only produces features
+features = parser.features(draft_state)
+if halt_classifier.predict(features):   # 78.5% test accuracy
+    stop_speculation()
+```
+
+The syntactic signal now lives inside the classifier weights, so there is no runtime
+parsing overhead on the hot path.
+
+## Outcome
+
+Halt rate dropped **79%**, token acceptance rose from 84% to **89.7%**, and throughput
+reached **25.03 tps** (+2.6%) with no additional model training. The lesson: a signal
+being *correct* is not the same as a signal being *worth acting on*.

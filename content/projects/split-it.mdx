@@ -1,0 +1,36 @@
+---
+title: Split-It
+tagline: AI-powered expense splitting that parses receipts automatically to remove friction from shared bills.
+category: Full-stack
+stat: 94% receipt extraction
+year: "2024"
+order: 5
+featured: true
+repo: https://github.com/manas-33
+demo:
+stack: [Tesseract, spaCy, Go, FastAPI, PostgreSQL, Flutter, Next.js, AWS EC2]
+metrics:
+  - { value: "94%", label: "receipt extraction accuracy" }
+  - { value: "98%", label: "service uptime" }
+  - { value: "500+", label: "annotated receipts" }
+overview: >-
+  Split-It automates the tedious part of splitting bills: reading the receipt. A
+  multi-step OCR-to-NLP pipeline extracts line items and totals, which then feed a
+  concurrency-safe expense ledger backed by PostgreSQL.
+highlights:
+  - OCR-through-NLP pipeline uses Tesseract for extraction and a custom spaCy NER model with CNN-based token classification for item, price, merchant, and total fields.
+  - 94% extraction accuracy across 500+ annotated receipts, with regex and template-matching fallback logic for edge cases.
+  - Go API gateway fronts FastAPI microservices for independent scaling and fault isolation, reaching 98% uptime.
+  - PostgreSQL ACID transactions with MVCC keep the shared ledger consistent under concurrent financial updates.
+  - Flutter mobile client and Next.js web app; Dockerized services on AWS EC2 with CloudWatch monitoring.
+---
+
+```mermaid
+flowchart TD
+  App["Flutter / Next.js client"] --> GW["Go API gateway"]
+  GW --> OCR["Tesseract OCR service"]
+  OCR --> NER["spaCy NER + CNN classifier"]
+  NER --> Val["Regex / template validation"]
+  Val --> Ledger["FastAPI expense service"]
+  Ledger --> DB[("PostgreSQL: MVCC transactions")]
+```

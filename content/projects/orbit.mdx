@@ -1,0 +1,39 @@
+---
+title: Orbit
+tagline: Distributed task orchestration engine for reliably executing long-running jobs across isolated worker nodes.
+category: Systems
+stat: at-least-once delivery
+year: "2025"
+order: 3
+featured: true
+repo: https://github.com/manas-33
+demo:
+stack: [Go, gRPC, Protobuf, PostgreSQL, Docker, Python]
+metrics:
+  - { value: "At-least-once", label: "delivery guarantee" }
+  - { value: "Race-free", label: "row-level-lock dispatch" }
+  - { value: "Auto-retry", label: "zombie-worker recovery" }
+overview: >-
+  Orbit is a distributed orchestration engine that schedules and reliably runs
+  background jobs across polyglot, isolated workers — designed around correctness under
+  concurrency and failure. A Go control plane schedules work, Python workers execute it
+  over a typed gRPC contract, and PostgreSQL is the single source of truth.
+highlights:
+  - Go control plane uses goroutines and channel-based select loops for high-concurrency scheduling with a priority-ordered job queue.
+  - Race-free dispatcher on PostgreSQL uses row-level locking and transactional state transitions to guarantee at-least-once delivery.
+  - Typed gRPC/Protobuf contract covers registration, leasing, heartbeats, result reporting, and log streaming across languages.
+  - Heartbeat-driven reaper recovers zombie workers, expires stale leases, and retries stalled jobs with configurable backoff.
+  - Execution isolated in CPU/memory-limited Docker containers via the Docker SDK to prevent cascading failures.
+---
+
+```mermaid
+flowchart TD
+  Client["Job submit"] --> Scheduler["Go scheduler / control plane"]
+  Scheduler --> DB[("PostgreSQL: jobs + attempts")]
+  Scheduler -->|"gRPC lease"| Worker1["Worker (Docker)"]
+  Scheduler -->|"gRPC lease"| Worker2["Worker (Docker)"]
+  Worker1 -->|"heartbeat + result"| Scheduler
+  Worker2 -->|"heartbeat + result"| Scheduler
+  Reaper["Heartbeat reaper"] --> DB
+  Reaper -->|"expire lease + retry"| Scheduler
+```

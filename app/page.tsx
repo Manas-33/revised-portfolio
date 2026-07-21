@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Hero } from "@/components/hero";
 import { Section } from "@/components/section";
+import { ExperienceList } from "@/components/experience-list";
 import { SectionNav } from "@/components/section-nav";
 import { RevealObserver } from "@/components/reveal";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -12,7 +13,6 @@ import {
   skills,
   education,
   socials,
-  type Experience,
   type SkillGroup,
   type Education,
   type Social,
@@ -117,42 +117,6 @@ export default function Home() {
         </a>
       </footer>
     </div>
-  );
-}
-
-function ExperienceList({ items }: { items: Experience[] }) {
-  return (
-    <ol className="flex flex-col">
-      {items.map((e) => (
-        <li
-          key={`${e.company}-${e.dates}`}
-          className="relative border-l border-rule pb-9 pl-6 last:pb-0"
-        >
-          <span
-            aria-hidden
-            className="absolute left-0 top-[5px] h-[7px] w-[7px] -translate-x-1/2 rounded-full border border-muted bg-page"
-          />
-          <div className="text-[14px] leading-5 text-faint tabular-nums">
-            {e.dates}
-          </div>
-          <div className="mt-1 text-[18px] text-ink">
-            {e.role}
-            <span className="text-muted"> · {e.company}</span>
-          </div>
-          <div className="text-[15px] text-faint">{e.location}</div>
-          <ul className="mt-2.5 flex flex-col gap-1.5">
-            {e.highlights.map((h) => (
-              <li
-                key={h}
-                className="relative pl-4 text-[16px] leading-relaxed text-muted before:absolute before:left-0 before:top-[0.72em] before:h-[3px] before:w-[3px] before:-translate-y-1/2 before:rounded-full before:bg-faint before:content-['']"
-              >
-                {h}
-              </li>
-            ))}
-          </ul>
-        </li>
-      ))}
-    </ol>
   );
 }
 

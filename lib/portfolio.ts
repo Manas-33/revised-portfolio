@@ -141,5 +141,6 @@ export const education: Education[] = [
 export const socials: Social[] = [
   { label: "GitHub", href: "https://github.com/manas-33" },
   { label: "LinkedIn", href: "https://linkedin.com/in/manasdalvi" },
+  { label: "Twitter", href: "https://x.com/manas__33" },
   { label: "Email", href: "mailto:manasman@usc.edu" },
 ];

@@ -13,6 +13,7 @@
   --rule-faint: #efede7;
   --fill: #f2f0ea;
   --accent: #2563eb;
+  --signal: #16a34a;
 }
 
 .dark {
@@ -24,6 +25,7 @@
   --rule-faint: #1b1b1f;
   --fill: #161619;
   --accent: #8aa8ff;
+  --signal: #4ade80;
 }
 
 @theme inline {
@@ -171,6 +173,23 @@ button:focus-visible {
   animation: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Node-constellation mark: signal pulses travel along the graph edges */
+.mark-signal {
+  stroke-dasharray: 26 100;
+  stroke-dashoffset: 126;
+  filter: drop-shadow(0 0 2px var(--signal)) drop-shadow(0 0 4px var(--signal));
+  animation: mark-signal 2.2s linear infinite;
+}
+
+@keyframes mark-signal {
+  from {
+    stroke-dashoffset: 126;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 [data-reveal] {
   opacity: 0;
   transform: translateY(14px);
@@ -196,6 +215,10 @@ button:focus-visible {
     filter: none !important;
     animation: none !important;
     transition: none !important;
+  }
+  .mark-signal {
+    animation: none !important;
+    opacity: 0 !important;
   }
 }
 

@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <div
       id="top"
-      className="w-full max-w-[962px] px-6 pt-4 md:px-14 md:pt-6 ml-[clamp(0px,7vw,128px)]"
+      className="w-full max-w-[962px] px-6 pt-4 md:px-14 md:pt-6 ml-[max(0px,calc(50vw_-_620px))]"
     >
       <div className="fixed right-4 top-4 z-20">
         <ThemeToggle />
@@ -106,7 +106,9 @@ export default function Home() {
       </main>
 
       <footer className="mt-24 flex items-center justify-between border-t border-rule py-8 text-[13px] text-faint">
-        <span>© {new Date().getFullYear()} {site.name}</span>
+        <span>
+          © {new Date().getFullYear()} {site.name}
+        </span>
         <a href="#top" className="transition-colors hover:text-muted">
           Back to top ↑
         </a>

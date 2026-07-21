@@ -38,7 +38,7 @@ export default async function ProjectPage({
   const relatedNotes = getNotesForProject(slug);
 
   return (
-    <div className="w-full max-w-[962px] pt-4 md:pt-6 ml-[clamp(0px,7vw,128px)]">
+    <div className="w-full max-w-[962px] pt-4 md:pt-6 ml-[max(0px,calc(50vw_-_620px))]">
       <RevealObserver />
       <div className="min-h-dvh px-6 pb-16 md:px-14">
         <PageHeader backHref="/#projects" backLabel="All projects" />

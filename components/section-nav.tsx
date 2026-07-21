@@ -29,19 +29,25 @@ export function SectionNav({ items }: { items: NavItem[] }) {
       aria-label="On this page"
       className="sticky top-0 z-10 flex overflow-x-auto border-y border-rule bg-page/90 backdrop-blur md:grid md:grid-flow-col md:auto-cols-fr md:overflow-visible"
     >
-      {items.map((item) => {
+      {items.map((item, i) => {
         const isActive = active === item.id;
         return (
           <a
             key={item.id}
             href={`#${item.id}`}
             aria-current={isActive ? "true" : undefined}
-            className={`flex-none whitespace-nowrap px-4 py-4 text-[14px] transition-colors ${
+            className={`flex flex-none flex-col gap-3 whitespace-nowrap px-2 py-4 text-[14px] transition-colors ${
               isActive
-                ? "border-x border-rule bg-fill text-ink"
-                : "text-muted hover:text-ink"
+                ? "bg-fill text-ink"
+                : "text-muted hover:bg-fill hover:text-ink"
             }`}
           >
+            <span
+              aria-hidden
+              className="invisible font-mono text-[12px] leading-none text-faint"
+            >
+              {String(i + 1).padStart(2, "0")}
+            </span>
             {item.label}
           </a>
         );

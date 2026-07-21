@@ -36,7 +36,7 @@ export function SectionNav({ items }: { items: NavItem[] }) {
             key={item.id}
             href={`#${item.id}`}
             aria-current={isActive ? "true" : undefined}
-            className={`flex flex-none flex-col gap-3 whitespace-nowrap px-2 py-4 text-[14px] transition-colors ${
+            className={`flex flex-none flex-col gap-3 whitespace-nowrap px-2 py-4 text-[16px] transition-colors ${
               isActive
                 ? "bg-fill text-ink"
                 : "text-muted hover:bg-fill hover:text-ink"
@@ -44,7 +44,7 @@ export function SectionNav({ items }: { items: NavItem[] }) {
           >
             <span
               aria-hidden
-              className="invisible font-mono text-[12px] leading-none text-faint"
+              className="invisible font-mono text-[14px] leading-none text-faint"
             >
               {String(i + 1).padStart(2, "0")}
             </span>

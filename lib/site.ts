@@ -1,9 +1,9 @@
 export const site = {
   name: "Manas Dalvi",
-  role: "Software Engineer",
+  role: "AI & Software Engineer",
   location: "Los Angeles, CA",
   tagline:
-    "Software engineer and CS master's student at USC, building AI systems, distributed backends, and developer tools.",
+    "AI & Software Engineer and Master's student at USC. I build AI systems, backed by full-stack, mobile, and cloud engineering. Currently seeking full-time opportunities in 2027.",
   email: "manasman@usc.edu",
   links: {
     github: "https://github.com/manas-33",

@@ -46,7 +46,7 @@ export default async function NotePage({
 
         <article>
           <section className="rise" style={{ animationDelay: "80ms" }}>
-            <div className="flex flex-wrap items-center gap-2 text-[12px] text-faint">
+            <div className="flex flex-wrap items-center gap-2 text-[14px] text-faint">
               <span className="font-mono text-accent">
                 {typeLabels[note.type]}
               </span>
@@ -55,11 +55,11 @@ export default async function NotePage({
               <span>·</span>
               <span>{note.readingTime} min read</span>
             </div>
-            <h1 className="mt-3 text-[32px] font-semibold leading-tight tracking-tight">
+            <h1 className="mt-3 text-[36px] font-semibold leading-tight tracking-tight">
               {note.title}
             </h1>
             {project && (
-              <p className="mt-3 text-[14px] text-muted">
+              <p className="mt-3 text-[16px] text-muted">
                 Part of the{" "}
                 <Link
                   href={`/projects/${project.slug}`}
@@ -73,7 +73,7 @@ export default async function NotePage({
             {note.tags.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-x-3 gap-y-1">
                 {note.tags.map((t) => (
-                  <span key={t} className="font-mono text-[12px] text-faint">
+                  <span key={t} className="font-mono text-[14px] text-faint">
                     #{t}
                   </span>
                 ))}
@@ -86,7 +86,7 @@ export default async function NotePage({
           </section>
         </article>
 
-        <footer className="mt-20 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-rule pt-6 text-[12.5px] text-faint">
+        <footer className="mt-20 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-rule pt-6 text-[14.5px] text-faint">
           <span>© {new Date().getFullYear()}, Manas Dalvi</span>
           <Link href="/" className="whitespace-nowrap transition-colors hover:text-ink">
             Home ↑

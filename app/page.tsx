@@ -7,7 +7,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { site } from "@/lib/site";
 import {
   tagline,
-  now,
+  // now,
   experience,
   skills,
   education,
@@ -21,7 +21,7 @@ import { getFeaturedProjects, type Project } from "@/lib/projects";
 import { getAllNotes, formatDate, type Note } from "@/lib/notes";
 
 const NAV = [
-  { id: "now", label: "Now" },
+  // { id: "now", label: "Now" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
   { id: "notes", label: "Notes" },
@@ -46,24 +46,24 @@ export default function Home() {
       </div>
 
       <a
-        href="#now"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-6 focus:top-4 focus:z-30 focus:bg-fill focus:px-3 focus:py-2 focus:text-[14px] focus:text-ink"
+        href="#experience"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-6 focus:top-4 focus:z-30 focus:bg-fill focus:px-3 focus:py-2 focus:text-[16px] focus:text-ink"
       >
         Skip to content
       </a>
 
-      <Hero name={site.name} tagline={tagline} />
+      <Hero name={site.name} role={site.role} tagline={tagline} />
 
       <div className="anim-fade mt-14" style={{ animationDelay: "330ms" }}>
         <SectionNav items={NAV} />
       </div>
 
       <main>
-        <Section id="now" label="Now">
-          <p className="max-w-[54ch] text-[19px] leading-[1.6] text-muted">
+        {/* <Section id="now" label="Now">
+          <p className="max-w-[54ch] text-[21px] leading-[1.6] text-muted">
             {now}
           </p>
-        </Section>
+        </Section> */}
 
         <Section id="experience" label="Experience">
           <ExperienceList items={experience} />
@@ -73,7 +73,7 @@ export default function Home() {
           <ProjectList items={projects} />
           <Link
             href="/projects"
-            className="group ml-[14px] mt-6 inline-flex items-center gap-1.5 text-[14px] text-muted transition-colors hover:text-ink"
+            className="group ml-[14px] mt-6 inline-flex items-center gap-1.5 text-[16px] text-muted transition-colors hover:text-ink"
           >
             All projects
             <span className="text-faint transition-transform group-hover:translate-x-0.5 group-hover:text-muted">
@@ -86,7 +86,7 @@ export default function Home() {
           <NoteList items={notes} />
           <Link
             href="/notes"
-            className="group ml-[14px] mt-6 inline-flex items-center gap-1.5 text-[14px] text-muted transition-colors hover:text-ink"
+            className="group ml-[14px] mt-6 inline-flex items-center gap-1.5 text-[16px] text-muted transition-colors hover:text-ink"
           >
             All notes
             <span className="text-faint transition-transform group-hover:translate-x-0.5 group-hover:text-muted">
@@ -108,7 +108,7 @@ export default function Home() {
         </Section>
       </main>
 
-      <footer className="mt-24 flex items-center justify-between border-t border-rule py-8 text-[13px] text-faint">
+      <footer className="mt-24 flex items-center justify-between border-t border-rule py-8 text-[15px] text-faint">
         <span>
           © {new Date().getFullYear()} {site.name}
         </span>
@@ -132,19 +132,19 @@ function ExperienceList({ items }: { items: Experience[] }) {
             aria-hidden
             className="absolute left-0 top-[5px] h-[7px] w-[7px] -translate-x-1/2 rounded-full border border-muted bg-page"
           />
-          <div className="text-[12px] leading-5 text-faint tabular-nums">
+          <div className="text-[14px] leading-5 text-faint tabular-nums">
             {e.dates}
           </div>
-          <div className="mt-1 text-[16px] text-ink">
+          <div className="mt-1 text-[18px] text-ink">
             {e.role}
             <span className="text-muted"> · {e.company}</span>
           </div>
-          <div className="text-[13px] text-faint">{e.location}</div>
+          <div className="text-[15px] text-faint">{e.location}</div>
           <ul className="mt-2.5 flex flex-col gap-1.5">
             {e.highlights.map((h) => (
               <li
                 key={h}
-                className="relative pl-4 text-[14px] leading-relaxed text-muted before:absolute before:left-0 before:top-[0.72em] before:h-[3px] before:w-[3px] before:-translate-y-1/2 before:rounded-full before:bg-faint before:content-['']"
+                className="relative pl-4 text-[16px] leading-relaxed text-muted before:absolute before:left-0 before:top-[0.72em] before:h-[3px] before:w-[3px] before:-translate-y-1/2 before:rounded-full before:bg-faint before:content-['']"
               >
                 {h}
               </li>
@@ -174,10 +174,10 @@ function ProjectList({ items }: { items: Project[] }) {
             >
               ↗
             </span>
-            <strong className="pr-6 text-[18px] font-normal leading-snug tracking-[-0.012em] text-ink">
+            <strong className="pr-6 text-[20px] font-normal leading-snug tracking-[-0.012em] text-ink">
               {p.title}
             </strong>
-            <span className="text-[14px] leading-[1.55] text-muted">
+            <span className="text-[16px] leading-[1.55] text-muted">
               {p.tagline}
             </span>
           </Link>
@@ -196,10 +196,10 @@ function NoteList({ items }: { items: Note[] }) {
             href={`/notes/${n.slug}`}
             className="group -mx-2 grid grid-cols-[92px_1fr_auto] items-baseline gap-4 px-2 py-4 transition-colors hover:bg-fill"
           >
-            <time className="whitespace-nowrap font-mono text-[12px] tabular-nums text-faint">
+            <time className="whitespace-nowrap font-mono text-[14px] tabular-nums text-faint">
               {formatDate(n.date)}
             </time>
-            <span className="text-[16px] leading-snug text-ink">
+            <span className="text-[18px] leading-snug text-ink">
               {n.title}
             </span>
             <span
@@ -223,11 +223,11 @@ function SkillList({ items }: { items: SkillGroup[] }) {
           key={g.category}
           className="grid grid-cols-[28px_1fr] gap-x-3 border-b border-rule py-4 md:grid-cols-[28px_128px_1fr] md:gap-x-4"
         >
-          <span className="pt-0.5 font-mono text-[12px] tabular-nums text-faint">
+          <span className="pt-0.5 font-mono text-[14px] tabular-nums text-faint">
             {String(i + 1).padStart(2, "0")}
           </span>
-          <span className="text-[15px] text-ink">{g.category}</span>
-          <span className="col-start-2 text-[14px] leading-relaxed text-muted md:col-start-3">
+          <span className="text-[17px] text-ink">{g.category}</span>
+          <span className="col-start-2 text-[16px] leading-relaxed text-muted md:col-start-3">
             {g.items.join(", ")}
           </span>
         </li>
@@ -248,12 +248,12 @@ function EducationList({ items }: { items: Education[] }) {
             aria-hidden
             className="absolute left-0 top-[5px] h-[7px] w-[7px] -translate-x-1/2 rounded-full border border-muted bg-page"
           />
-          <div className="text-[12px] leading-5 text-faint tabular-nums">
+          <div className="text-[14px] leading-5 text-faint tabular-nums">
             {e.dates}
           </div>
-          <div className="mt-1 text-[16px] text-ink">{e.school}</div>
-          <div className="text-[14px] text-muted">{e.degree}</div>
-          <div className="text-[13px] text-faint">{e.location}</div>
+          <div className="mt-1 text-[18px] text-ink">{e.school}</div>
+          <div className="text-[16px] text-muted">{e.degree}</div>
+          <div className="text-[15px] text-faint">{e.location}</div>
         </li>
       ))}
     </ol>
@@ -271,7 +271,7 @@ function ElsewhereList({ items }: { items: Social[] }) {
               href={s.href}
               target={external ? "_blank" : undefined}
               rel={external ? "noopener noreferrer" : undefined}
-              className="group inline-flex min-h-11 items-baseline gap-1.5 text-[16px] text-muted transition-colors hover:text-ink"
+              className="group inline-flex min-h-11 items-baseline gap-1.5 text-[18px] text-muted transition-colors hover:text-ink"
             >
               {s.label}
               {external && <span className="sr-only"> (opens in new tab)</span>}

@@ -14,11 +14,11 @@ export function PageHeader({
       <div>
         <Link
           href="/"
-          className="text-[15px] font-medium transition-colors hover:text-accent"
+          className="text-[17px] font-medium transition-colors hover:text-accent"
         >
           {site.name}
         </Link>
-        <p className="text-[14px] text-muted">
+        <p className="text-[16px] text-muted">
           <Link
             href={backHref}
             className="arrow-link transition-colors hover:text-ink"

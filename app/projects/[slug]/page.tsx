@@ -45,17 +45,17 @@ export default async function ProjectPage({
 
         {/* Title */}
         <section className="rise" style={{ animationDelay: "80ms" }}>
-          <p className="text-[13px] text-faint">
+          <p className="text-[15px] text-faint">
             {String(idx + 1).padStart(2, "0")} — {project.category}
           </p>
-          <h1 className="mt-2 text-[32px] font-semibold leading-tight tracking-tight">
+          <h1 className="mt-2 text-[36px] font-semibold leading-tight tracking-tight">
             {project.title}
           </h1>
-          <p className="mt-3 max-w-[52ch] text-[16px] leading-7 text-muted">
+          <p className="mt-3 max-w-[52ch] text-[18px] leading-7 text-muted">
             {project.tagline}
           </p>
           {(project.repo || project.demo) && (
-            <p className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-[14px]">
+            <p className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-[16px]">
               {project.repo && (
                 <a
                   className="arrow-link text-muted transition-colors hover:text-ink"
@@ -84,19 +84,19 @@ export default async function ProjectPage({
         <section className="crossrule mt-12 pt-8" data-reveal>
           <div className="flex flex-wrap gap-x-12 gap-y-4">
             <div>
-              <p className="text-[12px] uppercase tracking-widest text-faint">
+              <p className="text-[14px] uppercase tracking-widest text-faint">
                 Stack
               </p>
-              <p className="mt-1.5 max-w-[40ch] text-[14px] leading-6 text-muted">
+              <p className="mt-1.5 max-w-[40ch] text-[16px] leading-6 text-muted">
                 {project.stack.join(" · ")}
               </p>
             </div>
             {project.stat && (
               <div>
-                <p className="text-[12px] uppercase tracking-widest text-faint">
+                <p className="text-[14px] uppercase tracking-widest text-faint">
                   In one line
                 </p>
-                <p className="mt-1.5 text-[14px] text-muted">{project.stat}</p>
+                <p className="mt-1.5 text-[16px] text-muted">{project.stat}</p>
               </div>
             )}
           </div>
@@ -105,8 +105,8 @@ export default async function ProjectPage({
         {/* Overview */}
         {project.overview && (
           <section className="crossrule mt-12 pt-8" data-reveal>
-            <h2 className="text-[15px] font-medium">Overview</h2>
-            <p className="mt-4 max-w-[58ch] text-[15px] leading-7 text-muted">
+            <h2 className="text-[17px] font-medium">Overview</h2>
+            <p className="mt-4 max-w-[58ch] text-[17px] leading-7 text-muted">
               {project.overview}
             </p>
           </section>
@@ -115,7 +115,7 @@ export default async function ProjectPage({
         {/* Architecture */}
         {project.content.trim() && (
           <section className="crossrule mt-12 pt-8" data-reveal>
-            <h2 className="text-[15px] font-medium">Architecture</h2>
+            <h2 className="text-[17px] font-medium">Architecture</h2>
             <div className="mt-4">
               <MdxContent source={project.content} />
             </div>
@@ -124,7 +124,7 @@ export default async function ProjectPage({
 
         {/* Demo */}
         <section className="crossrule mt-12 pt-8" data-reveal>
-          <h2 className="text-[15px] font-medium">Demo</h2>
+          <h2 className="text-[17px] font-medium">Demo</h2>
           <div className="mt-5">
             <DemoMedia
               src={project.demo}
@@ -137,7 +137,7 @@ export default async function ProjectPage({
         {/* Highlights */}
         {project.highlights.length > 0 && (
           <section className="crossrule mt-12 pt-8" data-reveal>
-            <h2 className="text-[15px] font-medium">
+            <h2 className="text-[17px] font-medium">
               Highlights
               <sup className="ml-0.5 font-normal text-faint">
                 {project.highlights.length}
@@ -146,10 +146,10 @@ export default async function ProjectPage({
             <div className="mt-5 space-y-3.5">
               {project.highlights.map((h, i) => (
                 <div key={i} className="flex gap-4">
-                  <span className="shrink-0 text-[13px] tabular-nums text-faint">
+                  <span className="shrink-0 text-[15px] tabular-nums text-faint">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <p className="text-[14.5px] leading-6 text-muted">{h}</p>
+                  <p className="text-[16.5px] leading-6 text-muted">{h}</p>
                 </div>
               ))}
             </div>
@@ -159,14 +159,14 @@ export default async function ProjectPage({
         {/* Metrics */}
         {project.metrics.length > 0 && (
           <section className="crossrule mt-12 pt-8" data-reveal>
-            <h2 className="text-[15px] font-medium">Outcomes</h2>
+            <h2 className="text-[17px] font-medium">Outcomes</h2>
             <div className="mt-5 grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-3">
               {project.metrics.map((m, i) => (
                 <div key={i}>
-                  <div className="font-mono text-[20px] font-medium tracking-tight text-accent">
+                  <div className="font-mono text-[22px] font-medium tracking-tight text-accent">
                     {m.value}
                   </div>
-                  <div className="mt-1 text-[13px] leading-5 text-muted">
+                  <div className="mt-1 text-[15px] leading-5 text-muted">
                     {m.label}
                   </div>
                 </div>
@@ -178,7 +178,7 @@ export default async function ProjectPage({
         {/* Related notes */}
         {relatedNotes.length > 0 && (
           <section className="crossrule mt-12 pt-8" data-reveal>
-            <h2 className="text-[15px] font-medium">Related notes</h2>
+            <h2 className="text-[17px] font-medium">Related notes</h2>
             <ul className="mt-4 flex flex-col">
               {relatedNotes.map((n) => (
                 <li key={n.slug} className="border-b border-rule/70 last:border-0">
@@ -186,11 +186,11 @@ export default async function ProjectPage({
                     href={`/notes/${n.slug}`}
                     className="row-hover group flex items-baseline py-3"
                   >
-                    <span className="text-[15px] text-ink transition-colors group-hover:text-accent">
+                    <span className="text-[17px] text-ink transition-colors group-hover:text-accent">
                       {n.title}
                     </span>
                     <span className="leader" aria-hidden="true" />
-                    <span className="shrink-0 text-[12px] tabular-nums text-faint">
+                    <span className="shrink-0 text-[14px] tabular-nums text-faint">
                       {formatDate(n.date)}
                     </span>
                   </Link>
@@ -206,16 +206,16 @@ export default async function ProjectPage({
             href={`/projects/${next.slug}`}
             className="row-hover group flex items-baseline"
           >
-            <span className="text-[13px] text-faint">Next</span>
+            <span className="text-[15px] text-faint">Next</span>
             <span className="leader" aria-hidden="true" />
-            <span className="text-[15px] font-medium transition-colors group-hover:text-accent">
+            <span className="text-[17px] font-medium transition-colors group-hover:text-accent">
               {next.title} →
             </span>
           </Link>
         </section>
 
         {/* Footer */}
-        <footer className="mt-20 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-rule pt-6 text-[12.5px] text-faint">
+        <footer className="mt-20 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-rule pt-6 text-[14.5px] text-faint">
           <span>© {new Date().getFullYear()}, Manas Dalvi</span>
           <Link
             href="/"

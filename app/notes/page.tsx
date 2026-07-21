@@ -25,10 +25,10 @@ export default function NotesPage() {
         <PageHeader backHref="/" backLabel="Home" />
 
         <section className="rise" style={{ animationDelay: "80ms" }}>
-          <h1 className="text-[32px] font-semibold leading-tight tracking-tight">
+          <h1 className="text-[36px] font-semibold leading-tight tracking-tight">
             Notes
           </h1>
-          <p className="mt-3 max-w-[54ch] text-[16px] leading-7 text-muted">
+          <p className="mt-3 max-w-[54ch] text-[18px] leading-7 text-muted">
             Short build logs and deep dives from my own projects — the decisions
             I made, the tradeoffs, and the ideas behind them.
           </p>
@@ -43,18 +43,18 @@ export default function NotesPage() {
                   className="row-hover group flex flex-col gap-1.5 py-5"
                 >
                   <div className="flex items-baseline">
-                    <span className="text-[17px] text-ink transition-colors group-hover:text-accent">
+                    <span className="text-[19px] text-ink transition-colors group-hover:text-accent">
                       {n.title}
                     </span>
                     <span className="leader" aria-hidden="true" />
-                    <span className="shrink-0 text-[12px] tabular-nums text-faint">
+                    <span className="shrink-0 text-[14px] tabular-nums text-faint">
                       {formatDate(n.date)}
                     </span>
                   </div>
-                  <p className="max-w-[58ch] text-[14px] leading-6 text-muted">
+                  <p className="max-w-[58ch] text-[16px] leading-6 text-muted">
                     {n.summary}
                   </p>
-                  <div className="flex items-center gap-2 text-[12px] text-faint">
+                  <div className="flex items-center gap-2 text-[14px] text-faint">
                     <span className="font-mono text-accent">
                       {typeLabels[n.type]}
                     </span>
@@ -67,7 +67,7 @@ export default function NotesPage() {
           </ul>
         </section>
 
-        <footer className="mt-20 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-rule pt-6 text-[12.5px] text-faint">
+        <footer className="mt-20 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-rule pt-6 text-[14.5px] text-faint">
           <span>© {new Date().getFullYear()}, Manas Dalvi</span>
           <Link href="/" className="whitespace-nowrap transition-colors hover:text-ink">
             Home ↑

@@ -27,10 +27,10 @@ export default function ProjectsPage() {
         <PageHeader backHref="/" backLabel="Home" />
 
         <section className="rise" style={{ animationDelay: "80ms" }}>
-          <h1 className="text-[32px] font-semibold leading-tight tracking-tight">
+          <h1 className="text-[36px] font-semibold leading-tight tracking-tight">
             Projects
           </h1>
-          <p className="mt-3 max-w-[52ch] text-[16px] leading-7 text-muted">
+          <p className="mt-3 max-w-[52ch] text-[18px] leading-7 text-muted">
             Flagship work, each with architecture, a demo slot, and real outcomes.
           </p>
         </section>
@@ -44,16 +44,16 @@ export default function ProjectsPage() {
                   className="group flex flex-col gap-1.5 py-5 transition-colors sm:flex-row sm:items-baseline sm:gap-5"
                 >
                   <div className="flex w-full items-baseline sm:w-auto sm:flex-1">
-                    <span className="text-[17px] text-ink transition-colors group-hover:text-accent">
+                    <span className="text-[19px] text-ink transition-colors group-hover:text-accent">
                       {p.title}
                     </span>
                     <span className="leader hidden sm:block" aria-hidden="true" />
-                    <span className="shrink-0 font-mono text-[12px] text-faint">
+                    <span className="shrink-0 font-mono text-[14px] text-faint">
                       {p.category}
                     </span>
                   </div>
                 </Link>
-                <p className="-mt-2 pb-5 max-w-[58ch] text-[14px] leading-6 text-muted">
+                <p className="-mt-2 pb-5 max-w-[58ch] text-[16px] leading-6 text-muted">
                   {p.tagline}
                 </p>
               </li>
@@ -62,23 +62,23 @@ export default function ProjectsPage() {
         </section>
 
         <section className="crossrule mt-14 pt-8" data-reveal>
-          <h2 className="text-[15px] font-medium">More work</h2>
+          <h2 className="text-[17px] font-medium">More work</h2>
           <ul className="mt-5 flex flex-col gap-4">
             {moreProjects.map((p) => (
               <li
                 key={p.name}
                 className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-5"
               >
-                <span className="w-32 shrink-0 text-[15px] text-ink">
+                <span className="w-32 shrink-0 text-[17px] text-ink">
                   {p.name}
                 </span>
-                <span className="text-[14px] leading-6 text-muted">{p.desc}</span>
+                <span className="text-[16px] leading-6 text-muted">{p.desc}</span>
               </li>
             ))}
           </ul>
         </section>
 
-        <footer className="mt-20 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-rule pt-6 text-[12.5px] text-faint">
+        <footer className="mt-20 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-rule pt-6 text-[14.5px] text-faint">
           <span>© {new Date().getFullYear()}, Manas Dalvi</span>
           <Link href="/" className="whitespace-nowrap transition-colors hover:text-ink">
             Home ↑

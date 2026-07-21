@@ -14,7 +14,7 @@ export function Section({
       data-reveal
       className="mt-16 grid scroll-mt-24 grid-cols-1 gap-y-4 md:mt-28 md:grid-cols-[128px_1fr] md:gap-x-9"
     >
-      <h2 className="pt-1 text-[12px] font-normal uppercase tracking-[0.12em] text-muted">
+      <h2 className="pt-1 text-[14px] font-normal uppercase tracking-[0.12em] text-muted">
         {label}
       </h2>
       <div className="min-w-0">{children}</div>

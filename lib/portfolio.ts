@@ -33,15 +33,13 @@ export type Social = {
 };
 
 export const tagline: TaglineSegment[] = [
-  { t: "Software engineer and CS master's student at " },
+  { t: "Master's student at " },
   { t: "USC", strong: true },
-  { t: ", building " },
+  { t: ". I build " },
   { t: "AI systems", strong: true },
-  { t: ", " },
-  { t: "distributed backends", strong: true },
-  { t: ", and " },
-  { t: "developer tools", strong: true },
-  { t: "." },
+  { t: ", backed by full-stack, mobile, and cloud engineering. Currently seeking " },
+  { t: "full-time opportunities in 2027", strong: true },
+  { t: ". If you're building a great team, let's connect." },
 ];
 
 export const now =

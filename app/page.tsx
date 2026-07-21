@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Hero } from "@/components/hero";
 import { Section } from "@/components/section";
 import { SectionNav } from "@/components/section-nav";
+import { RevealObserver } from "@/components/reveal";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { site } from "@/lib/site";
 import {
@@ -38,6 +39,8 @@ export default function Home() {
       id="top"
       className="w-full max-w-[962px] px-6 pt-4 md:px-14 md:pt-6 ml-[max(0px,calc(50vw_-_620px))]"
     >
+      <RevealObserver />
+
       <div className="fixed right-4 top-4 z-20">
         <ThemeToggle />
       </div>
@@ -51,7 +54,7 @@ export default function Home() {
 
       <Hero name={site.name} tagline={tagline} />
 
-      <div className="mt-14">
+      <div className="anim-fade mt-14" style={{ animationDelay: "330ms" }}>
         <SectionNav items={NAV} />
       </div>
 

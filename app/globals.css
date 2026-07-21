@@ -118,29 +118,64 @@ button:focus-visible {
   opacity: 1;
 }
 
-/* ---------- Reveal animations ---------- */
+/* ---------- Reveal + entrance animations ---------- */
+/* Easing borrowed from arbatov: expo-out cubic-bezier(.16, 1, .3, 1) */
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
 .rise {
   opacity: 0;
-  animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: rise 0.62s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hero name: slides in from the left with a clearing blur */
+@keyframes name-in {
+  from {
+    opacity: 0;
+    transform: translateX(-22px);
+    filter: blur(1.2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+.anim-name {
+  opacity: 0;
+  animation: name-in 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Opacity-only entrance — safe for sticky elements (leaves no transform) */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.anim-fade {
+  opacity: 0;
+  animation: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(14px);
+  transition: opacity 0.62s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.62s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-reveal].in {
@@ -153,9 +188,12 @@ button:focus-visible {
     scroll-behavior: auto;
   }
   .rise,
+  .anim-name,
+  .anim-fade,
   [data-reveal] {
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
     animation: none !important;
     transition: none !important;
   }

@@ -250,23 +250,20 @@ function EducationList({ items }: { items: Education[] }) {
 
 function ElsewhereList({ items }: { items: Social[] }) {
   return (
-    <ul className="flex flex-col">
+    <ul className="flex flex-wrap gap-x-6 gap-y-2.5">
       {items.map((s) => {
         const external = s.href.startsWith("http");
         return (
-          <li key={s.label} className="border-b border-rule/70 last:border-0">
+          <li key={s.label}>
             <a
               href={s.href}
               target={external ? "_blank" : undefined}
               rel={external ? "noopener noreferrer" : undefined}
-              className="group flex items-center justify-between py-3 text-[16px] text-ink"
+              className="group inline-flex min-h-11 items-baseline gap-1.5 text-[16px] text-muted transition-colors hover:text-ink"
             >
-              <span className="transition-colors group-hover:text-accent">
-                {s.label}
-              </span>
-              <span className="text-faint transition-transform group-hover:-translate-y-0.5 group-hover:text-muted">
-                ↗
-              </span>
+              {s.label}
+              {external && <span className="sr-only"> (opens in new tab)</span>}
+              <span aria-hidden="true">↗</span>
             </a>
           </li>
         );

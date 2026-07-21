@@ -122,32 +122,34 @@ export default function Home() {
 
 function ExperienceList({ items }: { items: Experience[] }) {
   return (
-    <ol className="flex flex-col gap-9">
+    <ol className="flex flex-col">
       {items.map((e) => (
         <li
           key={`${e.company}-${e.dates}`}
-          className="grid grid-cols-1 gap-y-1.5 md:grid-cols-[132px_1fr] md:gap-x-6"
+          className="relative border-l border-rule pb-9 pl-6 last:pb-0"
         >
-          <div className="pt-0.5 text-[12px] leading-5 text-faint tabular-nums">
+          <span
+            aria-hidden
+            className="absolute left-0 top-[5px] h-[7px] w-[7px] -translate-x-1/2 rounded-full border border-muted bg-page"
+          />
+          <div className="text-[12px] leading-5 text-faint tabular-nums">
             {e.dates}
           </div>
-          <div>
-            <div className="text-[16px] text-ink">
-              {e.role}
-              <span className="text-muted"> · {e.company}</span>
-            </div>
-            <div className="text-[13px] text-faint">{e.location}</div>
-            <ul className="mt-2.5 flex flex-col gap-1.5">
-              {e.highlights.map((h) => (
-                <li
-                  key={h}
-                  className="relative pl-4 text-[14px] leading-relaxed text-muted before:absolute before:left-0 before:text-faint before:content-['—']"
-                >
-                  {h}
-                </li>
-              ))}
-            </ul>
+          <div className="mt-1 text-[16px] text-ink">
+            {e.role}
+            <span className="text-muted"> · {e.company}</span>
           </div>
+          <div className="text-[13px] text-faint">{e.location}</div>
+          <ul className="mt-2.5 flex flex-col gap-1.5">
+            {e.highlights.map((h) => (
+              <li
+                key={h}
+                className="relative pl-4 text-[14px] leading-relaxed text-muted before:absolute before:left-0 before:top-[0.72em] before:h-[3px] before:w-[3px] before:-translate-y-1/2 before:rounded-full before:bg-faint before:content-['']"
+              >
+                {h}
+              </li>
+            ))}
+          </ul>
         </li>
       ))}
     </ol>
@@ -187,19 +189,24 @@ function ProjectList({ items }: { items: Project[] }) {
 
 function NoteList({ items }: { items: Note[] }) {
   return (
-    <ul className="flex flex-col">
+    <ul className="border-t border-rule">
       {items.map((n) => (
-        <li key={n.slug} className="border-b border-rule/70 last:border-0">
+        <li key={n.slug} className="border-b border-rule">
           <Link
             href={`/notes/${n.slug}`}
-            className="row-hover group flex items-baseline py-3.5"
+            className="group -mx-2 grid grid-cols-[92px_1fr_auto] items-baseline gap-4 px-2 py-4 transition-colors hover:bg-fill"
           >
-            <span className="text-[16px] text-ink transition-colors group-hover:text-accent">
+            <time className="whitespace-nowrap font-mono text-[12px] tabular-nums text-faint">
+              {formatDate(n.date)}
+            </time>
+            <span className="text-[16px] leading-snug text-ink">
               {n.title}
             </span>
-            <span className="leader" aria-hidden="true" />
-            <span className="shrink-0 text-[12px] tabular-nums text-faint">
-              {formatDate(n.date)}
+            <span
+              aria-hidden="true"
+              className="text-faint transition-transform group-hover:-translate-y-0.5 group-hover:text-muted"
+            >
+              ↗
             </span>
           </Link>
         </li>
@@ -210,11 +217,11 @@ function NoteList({ items }: { items: Note[] }) {
 
 function SkillList({ items }: { items: SkillGroup[] }) {
   return (
-    <ol className="flex flex-col gap-3.5">
+    <ol className="flex flex-col border-t border-rule">
       {items.map((g, i) => (
         <li
           key={g.category}
-          className="grid grid-cols-[28px_1fr] gap-x-3 md:grid-cols-[28px_128px_1fr] md:gap-x-4"
+          className="grid grid-cols-[28px_1fr] gap-x-3 border-b border-rule py-4 md:grid-cols-[28px_128px_1fr] md:gap-x-4"
         >
           <span className="pt-0.5 font-mono text-[12px] tabular-nums text-faint">
             {String(i + 1).padStart(2, "0")}
@@ -231,20 +238,22 @@ function SkillList({ items }: { items: SkillGroup[] }) {
 
 function EducationList({ items }: { items: Education[] }) {
   return (
-    <ol className="flex flex-col gap-6">
+    <ol className="flex flex-col">
       {items.map((e) => (
         <li
           key={e.school}
-          className="grid grid-cols-1 gap-y-1 md:grid-cols-[132px_1fr] md:gap-x-6"
+          className="relative border-l border-rule pb-6 pl-6 last:pb-0"
         >
-          <div className="pt-0.5 text-[12px] leading-5 text-faint tabular-nums">
+          <span
+            aria-hidden
+            className="absolute left-0 top-[5px] h-[7px] w-[7px] -translate-x-1/2 rounded-full border border-muted bg-page"
+          />
+          <div className="text-[12px] leading-5 text-faint tabular-nums">
             {e.dates}
           </div>
-          <div>
-            <div className="text-[16px] text-ink">{e.school}</div>
-            <div className="text-[14px] text-muted">{e.degree}</div>
-            <div className="text-[13px] text-faint">{e.location}</div>
-          </div>
+          <div className="mt-1 text-[16px] text-ink">{e.school}</div>
+          <div className="text-[14px] text-muted">{e.degree}</div>
+          <div className="text-[13px] text-faint">{e.location}</div>
         </li>
       ))}
     </ol>

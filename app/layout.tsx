@@ -20,13 +20,13 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} — ${site.role}`,
-    template: `%s — ${site.name}`,
+    default: site.name,
+    template: `%s · ${site.name}`,
   },
   description: site.tagline,
   metadataBase: new URL("https://manasdalvi.vercel.app"),
   openGraph: {
-    title: `${site.name} — ${site.role}`,
+    title: `${site.name} · ${site.role}`,
     description: site.tagline,
     type: "website",
   },
